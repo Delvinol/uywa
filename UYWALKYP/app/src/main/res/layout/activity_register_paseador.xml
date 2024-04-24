@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e8e8f9"
+    tools:context=".LoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/top_backgroundr" />
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.17"
+                    app:srcCompat="@drawable/uywalkerlogo" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UyWalker"
+                    android:textColor="#ffffff"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView14"
+                    app:layout_constraintStart_toStartOf="@+id/imageView14"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Paseador"
+                android:textAlignment="center"
+                android:textColor="#1F525F"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView100"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Experiencia"
+                        android:textColor="#1F525F"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_categoria"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/editext_bkg_registerpaseador"
+                        android:ems="10"
+                        android:hint="Ingresa tu usuario"
+                        android:inputType="text"
+                        android:padding="8dp"
+                        android:textAlignment="center"
+                        android:textColor="#717171"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView191"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tarifa (p/ hora)"
+                        android:textColor="#1F525F"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/edit_tarifa"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/editext_bkg_registerpaseador"
+                        android:ems="10"
+                        android:hint="Ingresa tu tarifa"
+                        android:inputType="number"
+                        android:padding="8dp"
+                        android:textAlignment="center"
+                        android:textColor="#717171"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView149"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descripción"
+                    android:textColor="#1F525F"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:hint="Ingresa tu usuario"
+                    android:ems="10"
+                    android:background="@drawable/editext_bkg_registerpaseador"
+                    android:inputType="textMultiLine"
+                    android:textSize="16sp"
+                    android:textColor="#717171"
+                    android:textAlignment="center"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Distrito"
+                    android:textColor="#1F525F"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_distrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/editext_bkg_registerpaseador"
+                    android:ems="10"
+                    android:hint="Ingresa tu contraseña"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:textColor="#717171"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button"
+                android:onClick="SignUp"
+                style="@android:style/Widget.Button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="31dp"
+                android:background="@drawable/button_bkg_registerpaseador"
+                android:text="Registrate"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UyWalker</string>
+    <string name="google_map_api_key">AIzaSyBdFzA_mkBw4mgKsM9e3oddTHd0JlW1Pro</string>
+
+    <string-array name="categorias">
+        <item>Experto</item>
+        <item>Novato</item>
+        <item>Exótico</item>
+    </string-array>
+
+</resources>

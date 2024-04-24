@@ -1,0 +1,18 @@
+-- EL CODIGO QUE VERAS LO EJECUTARAS SIEMPRE Y CUANDO YA SE HAYA CREADO TU BASE DE DATOS EN MYSQL 
+-- NO REALICES REGISTROS EN EL FRONTEND SIN ANTES EJECUTAR ESTE CODIGO 
+
+use project; -- AQUI LE DECIMOS A MYSQL QUE REALIZAREMOS CONSULTAS CON ESTA BASE DE DATOS QUE SE ACABA DE CREAR 
+
+-- CON ESTAS INSERCIONES CREAMOS LA TABLA DE TIPOS DE USUARIOS PARA QUE RECIEN PODAMOS INGRESAR REGISTROS EN EL FRONTEND 
+
+-- Registro para la tabla de tipos de usuarios
+INSERT INTO tipo_usuario (id_tipo_usuario ,nombre_tipo_usuario, estado) VALUES (1, 'Propietario', 1);
+INSERT INTO tipo_usuario (id_tipo_usuario ,nombre_tipo_usuario, estado) VALUES (2, 'Paseador', 1);
+
+-- Verifica la creación de la tabla tipos de ususarios 
+SELECT * FROM tipo_usuario;
+
+-- Ahora sí prueba el registro de React, respeta la estructura definida en la entidad User, es decir si es varchar(8) solo pon una cadena de 8 para el DNI por ejemplo, sino te saldrá error, si respetas los campos declarados podras registrarte y loguearte sin problemas
+SELECT * FROM tipo_usuario;
+
+-- Aunque la aplicación no te funcionara lo único que me interesa a mí es que el frontend que se ejecute lo puedas personalizar y darle estilo GUIATE DE LAS PAGINAS DEL DOCUMENTO DEL PROYECTO INTEGRADOR

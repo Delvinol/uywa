@@ -1,0 +1,320 @@
+-- Creacion de tabla Usuarios OFICIAL TERMINADA --
+CREATE TABLE Usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_tipo_usuario INT NOT NULL,
+  nombres VARCHAR(20) NOT NULL,
+  apellidos VARCHAR(20) NOT NULL,
+  apodo VARCHAR(20),
+  email VARCHAR(50) UNIQUE NOT NULL,
+  direccion VARCHAR(35) UNIQUE NOT NULL,
+  edad TINYINT UNSIGNED  NOT NULL,
+  celular VARCHAR(9) UNIQUE NOT NULL,
+  dni VARCHAR(8) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  estado TINYINT UNSIGNED DEFAULT 1,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created_by INT,
+  updated_by INT,
+  FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+  FOREIGN KEY (updated_by) REFERENCES Usuarios(id),
+  FOREIGN KEY (id_tipo_usuario) REFERENCES Tipos_Usuarios(id_tipo_usuario)
+);
+
+
+
+-- Creacion de tabla de tipos de usuarios oficial TERMINADA --
+CREATE TABLE Tipos_Usuario (
+    id_tipo_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_tipo_usuario VARCHAR(20) NOT NULL,
+    descripcion TEXT, 
+    estado TINYINT UNSIGNED DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id)
+);
+
+
+
+-- Creación de tabla de Paseadores TERMINADA --
+
+CREATE TABLE Paseadores (
+    id_paseador INT AUTO_INCREMENT PRIMARY KEY, --
+    id_usuario INT NOT NULL, --
+    id_categoria INT NOT NULL, --
+    calificacion INT NOT NULL, --
+    descripcion TEXT NOT NULL, --
+    experiencia TEXT, 
+    ubicacion VARCHAR(20) NOT NULL, --
+    tarifa DECIMAL(8, 2) NOT NULL, --
+    saldo DECIMAL(8, 2) NOT NULL,
+    disponibilidad BOOLEAN NOT NULL,
+    foto VARCHAR(3) NOT NULL, -- Después será MEDIUMBLOB --
+    estado TINYINT UNSIGNED DEFAULT 1, --
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, --
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, --
+    created_by INT, --
+    updated_by INT, --
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id) ON DELETE CASCADE, 
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id)
+);
+
+-- Creacion de tabla transacciones oficial TERMINADO --
+CREATE TABLE Transacciones (
+
+    id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
+    id_paseador INT NOT NULL, --
+    id_propietario INT NOT NULL,
+    id_tipo_transaccion INT NOT NULL,  -- pago o devolucion --
+    id_estado_transaccion INT NOT NULL, 
+    monto DECIMAL(8, 2) NOT NULL,
+    estado TINYINT UNSIGNED DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (id_paseador) REFERENCES Paseadores(id_paseador) ON DELETE CASCADE,
+    FOREIGN KEY (id_propietario) REFERENCES Propietarios(id_propietario) ON DELETE CASCADE,
+    FOREIGN KEY (id_tipo_transaccion) REFERENCES Tipos_Transaccion(id_tipo_transaccion) ON DELETE CASCADE,
+    FOREIGN KEY (id_estado_transaccion) REFERENCES Estados_Transaccion(id_estado_transaccion) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id),
+    
+)
+
+-- Creacion de tipo de transacciones oficial TERMINADO --
+CREATE TABLE Tipos_Transaccion(
+    id_tipo_transaccion INT NOT NULL,
+    nombre_tipo VARCHAR(20) NOT NULL,
+    descripcion TEXT,    
+    estado TINYINT UNSIGNED DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY(created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY(updated_by) REFERENCES Usuarios(id)   
+)
+
+
+-- Creación de tabla estados de transacción TERMINADO--
+CREATE TABLE Estados_Transaccion(
+    id_estado_transaccion AUTO_INCREMENT PRIMARY KEY, -- pagado, deuda, etc --
+    nombre_estado VARCHAR(20) NOT NULL,
+    descripcion TEXT NOT NULL,
+    estado TINYINT UNSIGNED DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATED CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT
+)
+
+-- Creacion de tabla de Propietarios oficial TERMINADA --
+CREATE TABLE Propietarios (
+    id_propietario INT AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    id_mascota INT NOT NULL,
+    calificacion INT,
+    comentario TEXT,
+    preferencias_paseo TEXT,
+    saldo DECIMAL(8, 2) NOT NULL,
+    disponibilidad BOOLEAN NOT NULL,
+    foto VARCHAR(3) NOT NULL -- MEDIUMBLOB
+    estado TINYINT DEAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    PRIMARY KEY (id_propietario),
+    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_calificacion) REFERENCES Calificaciones(id_calificacion) ON DELETE CASCADE,
+    FOREIGN KEY (id_comentario) REFERENCES Comentarios(id_comentario) ON DELETE CASCADE,
+    FOREIGN KEY (id_mascota) REFERENCES Mascotas(id_mascota) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id) 
+);
+
+
+
+-- Creacion de Tabla de Categorias oficial TERMINADA--
+CREATE TABLE Categorias (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    categoria_nombre VARCHAR(20) NOT NULL,
+    descripcion TEXT NOT NULL,
+    estado TINYINT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id)
+) 
+
+
+-- Creacion de tabla normalizadora Mascotas_Propietario TERMINADO --
+
+CREATE TABLE Mascotas_Propietarios (
+    id_mascota_propietario INT AUTO_INCREMENT PRIMARY KEY,
+    id_propietario INT NOT NULL,
+    id_mascota INT NOT NULL,
+    estado TINYINT UNSIGNED DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (id_propietario) REFERENCES Propietarios(id_propietario) ON DELETE CASCADE,
+    FOREIGN KEY (id_mascota) REFERENCES Mascotas(id_mascota) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id)
+);
+
+
+-- Creacion de tabla Mascotas TERMINADA --
+CREATE TABLE Mascotas (
+    id_mascota INT AUTO_INCREMENT PRIMARY KEY,
+    id_tipo_mascota INT NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    raza VARCHAR(20),
+    pesoVARCHAR(20),
+    edad INT NOT NULL,
+    foto VARCHAR(3) NOT NULL,
+    necesidades TEXT,
+    estado TINYINT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (id_tipo_mascota) REFERENCES Tipos_Mascota(id_tipo_mascota) ON DELETE CASCADE
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id)
+);
+
+
+
+-- Creacion de tabla de Tipo_Mascota TERMINADO --
+CREATE TABLE Tipos_Mascota (
+    id_tipo_mascota INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL,
+    estado TINYINT DEFAULT 1, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT,
+    updated_by INT,
+    FOREIGN KEY (created_by) REFERENCES Usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES Usuarios(id) 
+);
+
+
+
+-- Creacion de tabla de Paseos TERMINADO --
+CREATE TABLE Paseos (
+    id_paseo INT AUTO_INCREMENT PRIMARY KEY,
+    id_reserva INT NOT NULL,
+    id_mascota INT NOT NULL,
+    id_paseador INT NOT NULL,
+    id_propietario INT NOT NULL,
+    comentario TEXT,
+    calificacion INT NOT NULL,
+    costo INT, -- se paga realmente
+    fecha_paseo INT,-- DATETIME NOT NULL, --
+    hora_paseo INT, -- DATETIME NOT NULL --
+    duracion_real INT, -- TIME,--
+    lugar VARCHAR(25),
+    estado TINYINT DEFAULT 1, 
+    PRIMARY KEY (id_paseo),
+    FOREIGN KEY (id_reserva) REFERENCES Reservas(id_reserva) ON DELETE CASCADE,
+    FOREIGN KEY (id_mascota) REFERENCES Mascotas(id_mascota) ON DELETE CASCADE,
+    FOREIGN KEY (id_paseador) REFERENCES Paseadores(id_paseador) ON DELETE CASCADE,
+    FOREIGN KEY (id_propietario) REFERENCES Propietarios(id_propietario) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES usuarios(id)
+);
+
+
+-- Creacion de Tabla de Reservas TERMINADO --
+CREATE TABLE Reservas (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    id_propietario INT NOT NULL,
+    id_paseador INT,    
+    id_mascota INT NOT NULL,
+    costo INT, -- Se menciona el costo del servicio
+    fecha_reserva INT,
+    hora_reserva INT, /* DATE NOT NULL*/
+    punto_encuentro VARCHAR(25), -- Lugar acordado para que recoja a la mascota (por ejemplo parque) --
+    duracion_reserva INT, -- Tiempo que se paseará a las mascota --
+    lugar_paseo VARCHAR(20), -- Para que pasee en la cuadra --
+    estado TINYINT DEFAULT 1,
+    FOREIGN KEY (id_propietarios) REFERENCES Propietarios(id_propietarios) ON DELETE CASCADE,
+    FOREIGN KEY (id_mascota) REFERENCES Mascotas(id_mascota) ON DELETE CASCADE,
+    FOREIGN KEY (id_paseador) REFERENCES Paseadores(id_paseador) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES usuarios(id)
+);
+
+
+-- Creacion de tablas de Ubicaciones TERMINADO --
+CREATE TABLE Ubicaciones (
+    id_ubicacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_propietario INT NOT NULL,
+    id_paseador INT NOT NULL,
+    id_paseo INT NOT NULL,
+    latitud_paseador ,
+    longitud_paseador,
+    latitud_propietario,
+    longitud_propietario,
+    nombre_ubicacion VARCHAR(20),
+    ubicacion_propietario POINT, -- o LATITUD Y LONGITUD
+    ubicacion_paseador POINT,-- o LATITUD Y LONGITUD
+    estado TINYINT DEFAULT 1,
+    PRIMARY KEY (id_ubicacion),
+    FOREIGN KEY (id_propietario) REFERENCES Propietarios(id_propietario) ON DELETE CASCADE,
+    FOREIGN KEY (id_paseador) REFERENCES Paseadores(id_paseador) ON DELETE CASCADE,
+    FOREIGN KEY (id_paseo) REFERENCES Paseos(id_paseo) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES usuarios(id)
+);
+
+
+-- Creacion de tabla de Calificaciones TERMINADA --
+CREATE TABLE Calificaciones (
+    id_calificacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_paseo INT NOT NULL,
+    id_propietario INT,
+    id_paseador INT NOT NULL,
+    calificacion INT,
+    estado TINYINT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by INT, -- Campo para el ID del usuario que creó el registro
+    updated_by INT, -- Campo para el ID del usuario que actualizó el registro
+    FOREIGN KEY (id_paseo) REFERENCES Paseos(id_paseo) ON DELETE CASCADE,
+    FOREIGN KEY (id_propietario) REFERENCES Propietarios(id_propietario) ON DELETE SET NULL,
+    FOREIGN KEY (id_paseador) REFERENCES Paseadores(id_paseador) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES usuarios(id),
+    FOREIGN KEY (updated_by) REFERENCES usuarios(id)
+);
+
+
+-- Creacion de tabla de Comentarios TERMINADA --
+CREATE TABLE Comentarios (
+    id_comentario INT AUTO_INCREMENT PRIMARY KEY,
+    id_paseo INT NOT NULL,
+    id_paseador INT NOT NULL,
+    id_propietario INT NOT NULL,
+    comentario VARCHAR(255),
+    estado TINYINT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_comentario),
+    FOREIGN KEY (id_paseo) REFERENCES Paseos(id_paseo) ON DELETE CASCADE,
+    FOREIGN KEY (id_propietario) REFERENCES Propietarios(id_propietario) ON DELETE SET NULL,
+    FOREIGN KEY (id_paseador) REFERENCES Paseadores(id_paseador) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (updated_by) REFERENCES usuarios(id_usuario)
+);
+
